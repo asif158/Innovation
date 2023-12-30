@@ -1,33 +1,38 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route, redirect } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './components/Login'
 import Home from './components/Home'
 
 function App() {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem('token'))
 
-  const handleLogin = (loginToken) => {
-    setToken(loginToken)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(localStorage.getItem('token'))
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
+  }, [token])
+
+  const handleLogin = () => {
+    setToken(localStorage.getItem('token'))
   }
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/login"
-          element={() =>
-            token ? redirect('/') : <Login onLogin={handleLogin} />
-          }
-        />
-        <Route
-          path="/"
-          index
-          render={() => (token ? <Home token={token} /> : redirect('/login'))}
-        />
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/" element={<PrivateRoute />} />
       </Routes>
     </BrowserRouter>
   )
+}
+
+const PrivateRoute = () => {
+  const token = localStorage.getItem('token')
+
+  return token ? <Home token={token} /> : <Navigate to="/login" replace />
 }
 
 export default App

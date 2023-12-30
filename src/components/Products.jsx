@@ -1,28 +1,42 @@
 import PropTypes from 'prop-types'
+import '../../public/styles/Products.css'
 
-function Products({ products, addToCart }) {
+function Products({ products = {}, addToCart }) {
+  //if (typeof products !== 'object' ||!products || Array.isArray(products)
+  if (!products) {
+    console.error('Invalid products data provided:', products)
+    return <div>Error: Unable to load products. Please try again later.</div>
+  }
+
   return (
-    <div>
-      <h3>Products</h3>
-      {products.map((product) => (
-        <div key={product.id}>
-          <h4>{product.name}</h4>
-          <p>Price: {product.price}</p>
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
-        </div>
-      ))}
+    <div className="product-grid">
+      {products.length > 0 ? (
+        products.map((product) => (
+          <div key={product.id} className="product-item">
+            <img src={product.thumbnail} alt={product.title} />
+            <h3>{product.title}</h3>
+            <h4>Price: {product.price}</h4>
+            <p>{product.description}</p>
+
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
+          </div>
+        ))
+      ) : (
+        <p>No products available</p>
+      )}
     </div>
   )
 }
 
-Products.PropTypes = {
-    products: PropTypes.shape({
-
-    }),
-}
-
 Products.propTypes = {
-  products: PropTypes.array.isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      thumbnail: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   addToCart: PropTypes.func.isRequired,
 }
 

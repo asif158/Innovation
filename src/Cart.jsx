@@ -1,4 +1,4 @@
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 
 function Cart({ cart }) {
   const cartCount = cart.length
@@ -6,7 +6,7 @@ function Cart({ cart }) {
 
   return (
     <div>
-      <h3>Cart</h3>
+      <h3>Cart Items: {cartCount}</h3>
       <p>Items in Cart: {cartCount}</p>
       <p>Total Amount: {totalAmount}</p>
     </div>
