@@ -32,12 +32,18 @@
   cursor: pointer;
 }
 
-/* Optional media queries for responsiveness */
-@media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* Adjust column layout for smaller screens */
-  }
+.search {
+  width: 70%;
+  height: 45px;
+  margin: auto;
+  padding-left: 30px;
+  background-color: #353b48;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.274);
+  border-radius: 30px;
+}
+
+.search::placeholder {
+  color: white;
+  opacity: 0.8;
 }
