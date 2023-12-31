@@ -15,8 +15,10 @@ function Login() {
       const response = await axios.post(
         'https://dummyjson.com/auth/login',
         {
-          username: 'kminchelle',
-          password: '0lelplR',
+          // username: 'kminchelle',
+          // password: '0lelplR',
+          username: username,
+          password: password,
         },
         {
           headers: {

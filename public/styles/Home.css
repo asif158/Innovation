@@ -4,3 +4,9 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.items:hover {
+  cursor: pointer;
+  color: #4aa2ff;
+  text-decoration: underline;
+}

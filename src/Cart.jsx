@@ -6,9 +6,8 @@ function Cart({ cart }) {
 
   return (
     <div>
-      <h3>Cart Items: {cartCount}</h3>
-      <p>Items in Cart: {cartCount}</p>
-      <p>Total Amount: {totalAmount}</p>
+      <h3>Items in Cart: {cartCount}</h3>
+      <h3>Total Amount: {totalAmount}</h3>
     </div>
   )
 }
