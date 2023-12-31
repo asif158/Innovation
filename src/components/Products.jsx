@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 function Products({ products = {}, addToCart }) {
   const [search, setSearch] = useState('')
+  const [maxPrice, setMaxPrice] = useState('')
   //if (typeof products !== 'object' ||!products || Array.isArray(products)
   if (!products) {
     console.error('Invalid products data provided:', products)
@@ -13,19 +14,32 @@ function Products({ products = {}, addToCart }) {
 
   return (
     <>
-      <input
-        className="search"
-        type="text"
-        placeholder="Search Products"
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <form className='filters'>
+        <input
+          className="search"
+          type="text"
+          placeholder="Search Products"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <input
+          className="price"
+          type="text"
+          placeholder="Max Price Filter"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+        />
+      </form>
       <div className="product-grid">
         {products.length > 0 ? (
           products
             .filter((product) => {
-              return search.toLowerCase() === ''
-                ? product
-                : product.title.toLowerCase().includes(search)
+              const titleMatch =
+                search.toLowerCase() === '' ||
+                product.title.toLowerCase().includes(search)
+              const priceMatch =
+                maxPrice === '' || product.price <= parseFloat(maxPrice)
+
+              return titleMatch && priceMatch
             })
             .map((product) => (
               <div key={product.id} className="product-item">

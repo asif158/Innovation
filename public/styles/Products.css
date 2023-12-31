@@ -32,10 +32,22 @@
   cursor: pointer;
 }
 
+.product-item button:hover {
+  background-color: rgb(41, 113, 41);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3em;
+}
+
 .search {
-  width: 70%;
+  width: 90%;
+  min-width: 30%;
   height: 45px;
-  margin: auto;
   padding-left: 30px;
   background-color: #353b48;
   color: white;
@@ -44,6 +56,22 @@
 }
 
 .search::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+.price {
+  height: 45px;
+  min-width: 30%;
+  margin-left: 10px;
+  padding-left: 30px;
+  background-color: #353b48;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.274);
+  border-radius: 30px;
+}
+
+.price::placeholder {
   color: white;
   opacity: 0.8;
 }
